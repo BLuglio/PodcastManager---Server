@@ -2,14 +2,13 @@
 const DOMParser = require('xmldom').DOMParser
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
 const Http = new XMLHttpRequest()
-const rssReader = require('rss-to-json')
 
 async function getRss(args) {
     try{
         let result = await Promise.all([
             parseRss(args)
         ])
-        return result
+        return result[0]
     } catch(e) {
         console.log(e)
         return []
@@ -19,44 +18,46 @@ async function getRss(args) {
 function parseRss(args) {
     return new Promise(function(resolve, reject){
         const url = args.url
-
-        rssReader.load(url, (err, rss) => {
-            
-            for (item of rss.items) {
-                console.log(item.title, "\n", item.link, "\n")
-             }
-        })
-
-
-        /*
+      
         Http.open("GET", url)
         Http.send()
         Http.onreadystatechange = function() { 
-            // Only run if the request is complete
-            if (Http.readyState !== 4) return;
-            // Process the response
+            if (Http.readyState !== 4) return
 			if (Http.status >= 200 && Http.status < 300) {
-                // If successful
-                let res = JSON.stringify(Http.responseText)
-                let xmlDoc = new DOMParser().parseFromString(Http.responseText, "application/rss+xml")
-                //console.log(xmlDoc)
-                link = xmlDoc.getElementsByTagName('image')
-                console.log(link)
-                //console.log(new DOMParser().parseFromString(Http.responseXML, "application/rss+xml"))
-				resolve(Http.responseText)
+                let res = Http.responseText
+                let xmlDoc = new DOMParser().parseFromString(res, "application/rss+xml")
+                let podcastTitle = xmlDoc.getElementsByTagName('title')[0].childNodes[0].nodeValue
+                let podcastDescription = xmlDoc.getElementsByTagName('description')[0].childNodes[0].nodeValue
+                let podcastImage = xmlDoc.getElementsByTagName('image')[0].getElementsByTagName('url')[0].childNodes[0].nodeValue
+                let items = xmlDoc.getElementsByTagName('item')
+                let episodes = []
+                for(let i = 0; i < items.length; i++){   
+                    let title= items[i].getElementsByTagName('title')[0].childNodes[0].nodeValue
+                    let description = items[i].getElementsByTagName('description')[0].childNodes[0].nodeValue
+                    let date = items[i].getElementsByTagName('pubDate')[0].childNodes[0].nodeValue
+                    episodes.push({
+                        "title": title,
+                        "description": description,
+                        "date": date
+                    })
+                }
+
+                let result = {
+                    "podcastTitle": podcastTitle,
+                    "podcastDescription": podcastDescription,
+                    "imageUrl": podcastImage,
+                    "episodes": episodes   
+                }
+
+                resolve(result)
 			} else {
-				// If failed
 				reject({
 					status: Http.status,
 					statusText: Http.statusText
 				})
 			}    
         }
-            
-        //chiamata http all'url passato come args
-        //restituisce l'rss convertito in json
-        */
-})
+    })
 }
 
 module.exports = getRss

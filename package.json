@@ -14,10 +14,11 @@
     "apollo-engine": "^1.1.2",
     "apollo-server": "^2.4.8",
     "express": "^4.16.4",
+    "feed2json": "^0.6.0",
     "forever": "^0.15.3",
     "graphql": "^14.2.0",
+    "jquery": "^3.3.1",
     "nodemon": "^1.18.10",
-    "rss-to-json": "^1.0.4",
     "websocket": "^1.0.28",
     "xmldom": "^0.1.27",
     "xmlhttprequest": "^1.8.0"
