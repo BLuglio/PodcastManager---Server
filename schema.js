@@ -14,7 +14,8 @@ const typeDefs = gql`
       episodes: [Episode]
   }
   type Query {
-      rss(url: String!): Rss
+      rss(url: String!): Rss,
+      multipleRss(urls: [String]!): [Rss]
   }  
 `;
 
