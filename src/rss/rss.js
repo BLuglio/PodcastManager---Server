@@ -43,12 +43,13 @@ function parseRss(args) {
                 }
 
                 let result = {
+                    "id": '_' + Math.random().toString(36).substr(2, 9),
+                    "url": url,
                     "podcastTitle": podcastTitle,
                     "podcastDescription": podcastDescription,
                     "imageUrl": podcastImage,
                     "episodes": episodes   
                 }
-
                 resolve(result)
 			} else {
 				reject({

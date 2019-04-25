@@ -3,6 +3,7 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
 let total = []
 
 async function getMultipleRss(args) {
+    total = [];
     try{
         for(let url of args.urls) {
             await parseRss(url).then(res => {
@@ -43,9 +44,9 @@ function parseRss(url) {
                         })
                     }
 
-                    console.log(podcastTitle)
-
                     let result = {
+                        "id": '_' + Math.random().toString(36).substr(2, 9),
+                        "url": url,
                         "podcastTitle": podcastTitle,
                         "podcastDescription": podcastDescription,
                         "imageUrl": podcastImage,

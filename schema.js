@@ -8,6 +8,8 @@ const typeDefs = gql`
     date: String
   }
   type Rss {
+      id: String,
+      url: String,
       podcastTitle: String,
       podcastDescription: String,
       imageUrl: String,
