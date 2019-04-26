@@ -5,7 +5,8 @@ const typeDefs = gql`
   type Episode {
     title: String,
     description: String,
-    date: String
+    date: String,
+    content: String 
   }
   type Rss {
       id: String,

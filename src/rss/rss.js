@@ -35,10 +35,12 @@ function parseRss(args) {
                     let title= items[i].getElementsByTagName('title')[0].childNodes[0].nodeValue
                     let description = items[i].getElementsByTagName('description')[0].childNodes[0].nodeValue
                     let date = items[i].getElementsByTagName('pubDate')[0].childNodes[0].nodeValue
+                    let content = items[i].getElementsByTagName('enclosure')[0].getAttribute('url')
                     episodes.push({
                         "title": title,
                         "description": description,
-                        "date": date
+                        "date": date,
+                        "content": content
                     })
                 }
 
