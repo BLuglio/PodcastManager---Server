@@ -4,7 +4,7 @@ Simplified backend for the Podcast organizer app. It is built in nodejs and it u
 
 A useful feature is a parser that extracts relevant information from an RSS feed in XML and provides it as a JSON object.
 
-![](github/screenshot.png)
+![](github/screen.png)
 
 LAUNCH INSTRUCTIONS:
   1) npm install
