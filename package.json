@@ -12,7 +12,7 @@
   "dependencies": {
     "activedirectory": "^0.7.2",
     "apollo-engine": "^1.1.2",
-    "apollo-server": "^2.4.8",
+    "apollo-server": "^2.14.2",
     "express": "^4.16.4",
     "feed2json": "^0.6.0",
     "forever": "^0.15.3",
